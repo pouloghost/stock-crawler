@@ -1,7 +1,7 @@
-import re
 # data from http://bbs.10jqka.com.cn/codelist.html
 # format is roughly Chinese_name space id space next one
 def parse_stock_ids(string, prefix):
+    import re
     result = {}
     parts = string.split()
     last = ''
