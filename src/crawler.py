@@ -14,10 +14,13 @@ class Stock:
     title = ['名字','代码','价格','昨收',\
              '今开','成交量','外盘','内盘',\
              '买一','买一量','买二','买二量',\
-             '买三','买三量','买四','买四量',\
+             '买三','买三量',
+'买四','买四量',\
              '买五','买五量','卖一','卖一量',\
-             '卖二','卖二量','卖三','卖三量',\
-             '卖四','卖四量','卖五','卖五量',\
+             
+'卖二','卖二量','卖三','卖三量',\
+             '卖四','卖四量',
+'卖五','卖五量',\
              '卖三','卖三量','卖四','卖四量',\
              '涨跌','涨跌幅','最高','最低',\
              '成交量','成交额','换手率','市盈率',\
@@ -49,16 +52,17 @@ def load_all(dicts, now):
         print('market {0}'.format(i))
         i += 1
         j = 0
+        nodata = 0
         total = len(dict)
         for key in dict:
             j += 1
             if(0 == j % 10):
-                print('{0} in {1}'.format(j, total))
+                print('{0} in {1}, {2} empties'.format(j, total, nodata))
             data = Stock(loader.fetch_data(key), key, now).get_data()
             if(None == data):
+                nodata += 1
                 continue
             results.append(data)
-                
     return results
 
 def write_to_file(results, now):
@@ -69,7 +73,6 @@ def write_to_file(results, now):
     writer.writerows(results)
     
 if __name__ == '__main__':
-    print(type(Stock.title))
     import sh, sz
     dicts = [sh.sh, sz.sz]
     import datetime
